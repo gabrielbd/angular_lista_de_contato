@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
@@ -8,7 +8,27 @@ import { environment } from 'src/environments/environment';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
+
+  //flag para indicar se o usuario esta ou nao autenticado
+  isAuthenticated: boolean = false;
+
+  //atributos para armazenar o nome e o email do usuario autenticado
+  nome_usuario : string = "";
+  email_usuario : string = "";
+
+  //método executado sempre que o componente é carregado..
+  ngOnInit(): void {
+    this.isAuthenticated = localStorage.getItem('AUTHENTICATION') != null;
+
+    if(this.isAuthenticated){
+      //ler o nome e o email do usuario autenticado
+      var dados = JSON.parse(localStorage.getItem('AUTHENTICATION') as string);
+
+      this.nome_usuario = dados.usuario;
+      this.email_usuario = dados.email;
+    }
+  }
 
   //mensagens
   loginMessage: string = "";
@@ -65,12 +85,14 @@ export class AppComponent {
       this.formAccountLogin.value
     )
       .subscribe(
-        (success:any) => {
+        (success: any) => {
           console.log(success);
 
           //salvar as informações obtidas da API em uma 'local storage'
           localStorage.setItem("AUTHENTICATION", JSON.stringify(success));
 
+          //recarregar a pagina do projeto
+          window.location.href = "/";
         },
         (e) => {
           //capturar o erro obtido
@@ -125,7 +147,7 @@ export class AppComponent {
       this.formAccountPasswordRecover.value
     )
       .subscribe(
-        (success:any) => {
+        (success: any) => {
           this.passwordRecoverMessage = success.message;
           this.formAccountPasswordRecover.reset();
         },
@@ -134,6 +156,14 @@ export class AppComponent {
         }
       )
   }
+
+  logout(): void {
+    //verificar se realmente o usuario deseja sair do sistema
+    if (window.confirm('Deseja realmente sair do sistema?')) {
+      //apagar o conteudo gravado na localstorage
+      localStorage.removeItem('AUTHENTICATION');
+      //recarregar a página inicial do sistema
+      window.location.href = "/";
+    }
+  }
 }
-
-

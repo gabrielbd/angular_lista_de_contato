@@ -1,0 +1,117 @@
+<div class="card">
+    <div class="card-body">
+        <div>
+            <h4>Consulta de Contatos</h4>
+            <hr />
+
+            <table class="table table-hover table-striped">
+                <thead>
+                    <tr>
+                        <th>Foto</th>
+                        <th>Nome do Contato</th>
+                        <th>Email</th>
+                        <th>Telefone</th>
+                        <th width="160">Operações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>
+                            <button class="btn btn-primary btn-sm" data-bs-target="#janela_edicao"
+                                data-bs-toggle="modal">
+                                Editar
+                            </button>
+                            &nbsp;
+                            <button class="btn btn-danger btn-sm" data-bs-target="#janela_exclusao"
+                                data-bs-toggle="modal">
+                                Excluir
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="5">
+                            Quantidade de contatos: 0
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+
+        </div>
+    </div>
+</div>
+
+<!-- janela para edição da tarefa -->
+<div id="janela_edicao" class="modal fade" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Atualizar Contato</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+                <form>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label>Nome do Contato:</label>
+                            <input type="text" class="form-control" />
+                        </div>
+                    </div>
+
+                    <br />
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label>Telefone:</label>
+                            <input type="text" class="form-control" />
+                        </div>
+                        <div class="col-md-4">
+                            <label>Email:</label>
+                            <input type="text" class="form-control" />
+                        </div>
+                        <div class="col-md-4">
+                            <label>Foto:</label>
+                            <input type="text" class="form-control" />
+                        </div>
+                    </div>
+
+                    <br />
+
+                    <input type="submit" value="Salvar Alterações" class="btn btn-primary" />
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- janela para exclusão da tarefa -->
+<div id="janela_exclusao" class="modal fade" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Excluir Contato</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+                <p>
+                    Deseja realmente excluir o contato selecionado?
+                </p>
+
+                <button class="btn btn-danger">
+                    Confirmar Exclusão
+                </button>
+
+            </div>
+        </div>
+    </div>
+</div>
